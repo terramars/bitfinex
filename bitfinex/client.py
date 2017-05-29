@@ -339,6 +339,132 @@ class TradeClient:
 
         return json_resp
 
+    def deposit_btc(self, method, wallet_name, renew):
+        """
+        Deposit bitcoins.
+        :param method:
+        :param wallet_name:
+        :param renew:
+        :return:
+        """
+        payload = {
+
+            "request": "/v1/order/new",
+            "nonce": self._nonce,
+            "method": method,
+            "wallet_name": wallet_name,
+            "renew": renew,
+
+        }
+
+        signed_payload = self._sign_payload(payload)
+        r = requests.post(self.URL + "/deposit/new", headers=signed_payload, verify=True)
+        json_resp = r.json()
+
+        try:
+            json_resp['address']
+        except:
+            return json_resp['message']
+
+        return json_resp
+    
+    def deposit_btc(self, method, wallet_name, renew=0):
+        """
+        Deposit USD.
+        :param method:
+        :param wallet_name:
+        :param renew:
+        :return:
+        """
+        payload = {
+
+            "request": "/v1/order/new",
+            "nonce": self._nonce,
+            "method": method,
+            "wallet_name": wallet_name,
+            "renew": renew,
+
+        }
+
+        signed_payload = self._sign_payload(payload)
+        r = requests.post(self.URL + "/deposit/new", headers=signed_payload, verify=True)
+        json_resp = r.json()
+
+        try:
+            json_resp['address']
+        except:
+            return json_resp['message']
+
+        return json_resp
+
+    def withdraw_crypto(self, withdraw_type, walletselected, amount, address):
+        """
+        Withdraw crypto currency.
+        :param withdraw_type:
+        :param walletselected:
+        :param amount:
+        :param address:
+        :return:
+        """
+        payload = {
+
+            "request": "/v1/order/new",
+            "nonce": self._nonce,
+            "withdraw_type": withdraw_type,
+            "walletselected": walletselected,
+            "amount": amount,
+            "address": address,
+
+        }
+
+        signed_payload = self._sign_payload(payload)
+        r = requests.post(self.URL + "/withdraw", headers=signed_payload, verify=True)
+        json_resp = r.json()
+
+        try:
+            json_resp['address']
+        except:
+            return json_resp['message']
+
+        return json_resp
+
+    def withdraw_usd(self, withdraw_type, walletselected, amount, account_number, bank_name, bank_address, bank_city, bank_country):
+        """
+        Withdraw crypto currency.
+        :param withdraw_type:
+        :param walletselected:
+        :param amount:
+        :param account_number:
+        :param bank_name:
+        :param bank_address:
+        :param bank_city:
+        :param bank_country:
+        :return:
+        """
+        payload = {
+
+            "request": "/v1/order/new",
+            "nonce": self._nonce,
+            "withdraw_type": withdraw_type,
+            "walletselected": walletselected,
+            "amount": amount,
+            "account_number": account_number,
+            "bank_name": bank_name,
+            "bank_address": bank_address,
+            "bank_city": bank_country,
+
+        }
+
+        signed_payload = self._sign_payload(payload)
+        r = requests.post(self.URL + "/withdraw", headers=signed_payload, verify=True)
+        json_resp = r.json()
+
+        try:
+            json_resp['address']
+        except:
+            return json_resp['message']
+
+        return json_resp
 
 
 class Client:
