@@ -367,36 +367,7 @@ class TradeClient:
             return json_resp['message']
 
         return json_resp
-    
-    def deposit_btc(self, method, wallet_name, renew=0):
-        """
-        Deposit USD.
-        :param method:
-        :param wallet_name:
-        :param renew:
-        :return:
-        """
-        payload = {
-
-            "request": "/v1/order/new",
-            "nonce": self._nonce,
-            "method": method,
-            "wallet_name": wallet_name,
-            "renew": renew,
-
-        }
-
-        signed_payload = self._sign_payload(payload)
-        r = requests.post(self.URL + "/deposit/new", headers=signed_payload, verify=True)
-        json_resp = r.json()
-
-        try:
-            json_resp['address']
-        except:
-            return json_resp['message']
-
-        return json_resp
-
+ 
     def withdraw_crypto(self, withdraw_type, walletselected, amount, address):
         """
         Withdraw crypto currency.
