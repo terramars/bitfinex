@@ -21,7 +21,6 @@ PATH_ORDERBOOK = "book/%s"
 TIMEOUT = 5.0
 
 
-
 class TradeClient:
     """
     Authenticated client for trading through Bitfinex API
@@ -39,7 +38,7 @@ class TradeClient:
         Returns a nonce
         Used in authentication
         """
-        return str(time.time() * 1000000)
+        return str(int(time.time() * 1e15))
 
     def _sign_payload(self, payload):
         j = json.dumps(payload)
@@ -367,7 +366,7 @@ class TradeClient:
             return json_resp['message']
 
         return json_resp
- 
+
     def withdraw_crypto(self, withdraw_type, walletselected, amount, address):
         """
         Withdraw crypto currency.
