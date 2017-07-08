@@ -143,13 +143,9 @@ class TradeClient:
         json_resp = r.json()
 
         try:
-            json_resp['avg_excution_price']
+            json_resp['avg_execution_price']
         except:
-            try:
-                return json_resp['message']
-            except:
-                return json_resp
-        return None
+            return json_resp['message']
 
     def active_orders(self):
         """
