@@ -146,6 +146,7 @@ class TradeClient:
             json_resp['avg_execution_price']
         except:
             return json_resp['message']
+        return json_resp
 
     def active_orders(self):
         """
